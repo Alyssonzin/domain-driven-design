@@ -1,12 +1,17 @@
+import { CPF } from "../value_objects/CPF";
+import { FullName } from "../value_objects/FullName";
+
 export class User {
   private id: string;
-  private name: string;
+  private name: FullName;
+  private cpf: CPF;
   private activeLoans: number;
   private readonly MAX_ACTIVE_LOANS = 3;
 
-  constructor(id: string, name: string, activeLoans = 0) {
+  constructor(id: string, name: FullName, cpf: CPF, activeLoans = 0) {
     this.id = id;
     this.name = name;
+    this.cpf = cpf;
     this.activeLoans = activeLoans;
   }
 
@@ -14,8 +19,12 @@ export class User {
     return this.id;
   }
 
+  getCpf(): CPF {
+    return this.cpf;
+  }
+
   getName(): string {
-    return this.name;
+    return this.name.getFullName();
   }
 
   getActiveLoans(): number {
